@@ -11,7 +11,8 @@ jobs:
       WAYPOINT_SERVER_TLS_SKIP_VERIFY: 1
     steps:
       - uses: actions/checkout@v2
-      - uses: hashicorp/action-setup-waypoint
+      - uses: hashicorp/action-setup-waypoint@b954572
+
         with:
           version: '0.1.0'
     - run: waypoint init
