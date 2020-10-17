@@ -11,6 +11,7 @@ jobs:
         with:
           version: '0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          kubernetes_master: ${{ secrets.KUBERNETES_MASTER }}
           waypoint_server_address: 'afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9701'
           waypoint_server_ui: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9702'
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
