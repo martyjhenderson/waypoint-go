@@ -1,3 +1,3 @@
 module github.com/martyjhenderson/waypoint-go
 
-go 1.15
+go 1.14

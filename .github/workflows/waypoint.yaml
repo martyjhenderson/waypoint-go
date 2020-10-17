@@ -1,33 +1,46 @@
-steps:
-  - uses: actions/checkout@v2
-  - uses: hashicorp/action-waypoint
-    name: Setup
-    with:
-      version: '0.0.1-beta1'
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      waypoint_server_address: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9701'
-      waypoint_server_ui: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9702'
-      waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
-      workspace: default
-  - uses: hashicorp/action-waypoint
-    name: Build
-    with:
-      operation: build
-      version: '0.0.1-beta1'
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      workspace: default
-  - uses: hashicorp/action-waypoint
-    name: Deploy
-    with:
-      operation: deploy
-      version: '0.0.1-beta1'
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      workspace: default
-  - uses: hashicorp/action-waypoint
-    name: Release
-    if: ${{ github.ref == 'refs/heads/master' }}
-    with:
-      operation: release
-      version: '0.0.1-beta1'
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      workspace: default
+name: 'waypoint'
+on: push
+
+jobs:
+  waypoint:
+    runs-on: ubuntu-latest
+    env:
+      KUBERNETES_MASTER: ${{ secrets.KUBERNETES_MASTER }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - uses: hashicorp/action-waypoint@c98d9c3
+        name: Setup
+        with:
+          version: '0.1.2'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          waypoint_server_address: 'afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9701'
+          waypoint_server_ui: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9702'
+          waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
+          workspace: default
+      - uses: hashicorp/action-waypoint@c98d9c3
+        name: Build
+        with:
+          operation: build
+          version: '0.1.2'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workspace: default
+      - uses: hashicorp/action-waypoint@c98d9c3
+        name: Deploy
+        with:
+          operation: deploy
+          version: '0.1.2'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workspace: default
+      - uses: hashicorp/action-waypoint@c98d9c3
+        name: Release
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          operation: release
+          version: '0.1.2'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workspace: default
