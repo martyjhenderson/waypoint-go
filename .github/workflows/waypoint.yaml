@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hashicorp/action-setup-waypoint
         with:
-          version: '0.1.2'
-      - run: waypoint init
-      - run: waypoint build
+          version: '0.1.0'
+    - run: waypoint init
+    - run: waypoint build
