@@ -1,9 +1,12 @@
+name: 'waypoint'
+on: push
+
 steps:
   - uses: actions/checkout@v2
   - uses: hashicorp/action-waypoint
     name: Setup
     with:
-      version: '0.0.1-beta1'
+      version: '0.1.2'
       github_token: ${{ secrets.GITHUB_TOKEN }}
       waypoint_server_address: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9701'
       waypoint_server_ui: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9702'
@@ -13,14 +16,14 @@ steps:
     name: Build
     with:
       operation: build
-      version: '0.0.1-beta1'
+      version: '0.1.2'
       github_token: ${{ secrets.GITHUB_TOKEN }}
       workspace: default
   - uses: hashicorp/action-waypoint
     name: Deploy
     with:
       operation: deploy
-      version: '0.0.1-beta1'
+      version: '0.1.2'
       github_token: ${{ secrets.GITHUB_TOKEN }}
       workspace: default
   - uses: hashicorp/action-waypoint
@@ -28,6 +31,6 @@ steps:
     if: ${{ github.ref == 'refs/heads/master' }}
     with:
       operation: release
-      version: '0.0.1-beta1'
+      version: '0.1.2'
       github_token: ${{ secrets.GITHUB_TOKEN }}
       workspace: default
