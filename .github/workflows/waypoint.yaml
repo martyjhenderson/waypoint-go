@@ -18,8 +18,8 @@ jobs:
         with:
           version: '0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          waypoint_server_address: 'afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9701'
-          waypoint_server_ui: 'https://afa1be28c76944d15bff7969efc8f6c3-1774364022.us-east-1.elb.amazonaws.com:9702'
+          waypoint_server_address: ${{ secrets.WAYPOINT_SERVER }}
+          waypoint_server_ui: ${{ secrets.WAYPOINT_URL }}
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
           workspace: default
       - uses: hashicorp/action-waypoint@c98d9c3
