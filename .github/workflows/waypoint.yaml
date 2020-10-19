@@ -16,24 +16,22 @@ jobs:
       - uses: hashicorp/action-waypoint@v1
         name: Setup
         with:
-          version: '0.1.2'
+          version: 'v0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           waypoint_server_address: ${{ secrets.WAYPOINT_SERVER }}
-          waypoint_server_ui: ${{ secrets.WAYPOINT_URL }}
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
-          workspace: default
       - uses: hashicorp/action-waypoint@v1
         name: Build
         with:
           operation: build
-          version: '0.1.2'
+          version: 'v0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workspace: default
       - uses: hashicorp/action-waypoint@v1
         name: Deploy
         with:
           operation: deploy
-          version: '0.1.2'
+          version: 'v0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workspace: default
       - uses: hashicorp/action-waypoint@v1
@@ -41,6 +39,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           operation: release
-          version: '0.1.2'
+          version: 'v0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workspace: default
