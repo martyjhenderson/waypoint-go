@@ -16,7 +16,7 @@ jobs:
         with:
           version: '0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          waypoint_server_address: 'a21a8e8d227464ad3a436ac0516b36f5-355704068.us-east-1.elb.amazonaws.com:9702'
+          waypoint_server_address: 'a21a8e8d227464ad3a436ac0516b36f5-355704068.us-east-1.elb.amazonaws.com:9701'
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
       - uses: hashicorp/action-waypoint@v1
         name: Build
