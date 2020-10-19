@@ -18,7 +18,7 @@ jobs:
         with:
           version: '0.1.2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          waypoint_server_address: ${{ secrets.WAYPOINT_SERVER }}
+          waypoint_server_address: '${{ secrets.WAYPOINT_SERVER }}'
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
       - uses: hashicorp/action-waypoint@v1
         name: Build
