@@ -31,5 +31,5 @@ jobs:
           version: '0.1.5'
       - name: Waypoint Init
         run: waypoint init
-      - name: Waypoint Build
-        run: waypoint build
+      - name: Waypoint Build 
+        run: waypoint build -workspace ${GITHUB_REF##*/}
