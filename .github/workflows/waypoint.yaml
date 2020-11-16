@@ -25,6 +25,17 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: DO Kubeconfig
         run: doctl kubernetes cluster kubeconfig save ${{ secrets.DO_CLUSTER_NAME }}
+      
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+
       - uses: hashicorp/action-setup-waypoint@b6de610
         name: Waypoint Setup
         with:
@@ -32,6 +43,6 @@ jobs:
       - name: Waypoint Init
         run: waypoint init
       - name: Waypoint Build 
-        run: waypoint build -workspace ${{ github.head_ref }}
+        run: waypoint build -workspace ${{ env.BRANCH_NAME }}
       - name: Waypoint Deploy and Release
-        run: waypoint deploy -workspace ${{ github.head_ref }}
+        run: waypoint deploy -workspace ${{ env.BRANCH_NAME }}
