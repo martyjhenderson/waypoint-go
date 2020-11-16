@@ -19,8 +19,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           waypoint_server_address: 'waypoint.ravegrunt.com:9701'
-          waypoint_server_ui: 'https://waypoint.ravegrunt.com:9702'
           waypoint_server_token: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
+          version: '0.1.5'
       - uses: hashicorp/action-waypoint@v1
         name: Build
         with:
