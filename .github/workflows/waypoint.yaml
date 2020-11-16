@@ -14,7 +14,7 @@ jobs:
           registry: harbor.ravegrunt.com
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
-      - uses: hashicorp/action-waypoint@main
+      - uses: hashicorp/action-waypoint@v1
         name: Setup
         with:
           version: '0.1.5'
