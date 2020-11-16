@@ -8,12 +8,12 @@ app "go-demo" {
 
   build {
     use "pack" {
+        builder="gcr.io/buildpacks/builder:v1"
     }
     registry {
-      use "aws-ecr" {
-        region     = "us-east-1"
-        repository = "waypoint-go"
-        tag        = "latest"
+      use "docker" {
+        image = "harbor.ravegrunt.com/waypointdemos/waypoint-go"
+        tag = "latest"
       }
     }
   }
