@@ -8,7 +8,7 @@ jobs:
     env:
       KUBERNETES_MASTER: ${{ secrets.KUBERNETES_MASTER }}
       WAYPOINT_SERVER_TOKEN: ${{ secrets.WAYPOINT_SERVER_TOKEN }}
-      WAYPOINT_SERVER_ADDR: waypoint.example.com:9701
+      WAYPOINT_SERVER_ADDR: waypoint.ravegrunt.com:9701
       WAYPOINT_SERVER_TLS: 1
       WAYPOINT_SERVER_TLS_SKIP_VERIFY: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
