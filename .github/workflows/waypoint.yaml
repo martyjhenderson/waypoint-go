@@ -36,6 +36,11 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
+      - name: Check for Main Deploy
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: echo "BRANCH_NAME=default" >> $GITHUB_ENV
+
       - uses: hashicorp/action-setup-waypoint@b6de610
         name: Waypoint Setup
         with:
@@ -44,5 +49,8 @@ jobs:
         run: waypoint init
       - name: Waypoint Build 
         run: waypoint build -workspace ${{ env.BRANCH_NAME }}
-      - name: Waypoint Deploy and Release
-        run: waypoint deploy -workspace ${{ env.BRANCH_NAME }}
+      - name: Waypoint Deploy
+        run: waypoint deploy -workspace ${{ env.BRANCH_NAME }} -release=false
+      - name: Waypoint Release 
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: Waypoint release -workspace ${{ env.BRANCH_NAME }}

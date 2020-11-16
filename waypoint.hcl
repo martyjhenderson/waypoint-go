@@ -21,6 +21,7 @@ app "go-demo" {
   deploy {
     use "kubernetes" {
       probe_path = "/"
+      namespace = "waypoint-go"
     }
   }
 
@@ -28,6 +29,7 @@ app "go-demo" {
     use "kubernetes" {
       load_balancer = true
       port          = 80
+      namespace = "waypoint-go-prod"
     }
   }
 }
