@@ -19,9 +19,17 @@ jobs:
           registry: harbor.ravegrunt.com
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
+      - name: Install doctl
+        users: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: DO Kubeconfig
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.DO_CLUSTER_NAME }}
       - uses: hashicorp/action-setup-waypoint@b6de610
-        name: Waypoint Init
+        name: Waypoint Setup
         with:
           version: '0.1.5'
-      - run: waypoint init
-      - run: waypoint build
+      - name: Waypoint Init
+        run: waypoint init
+      - name: Waypoint Build
+        run: waypoint build
