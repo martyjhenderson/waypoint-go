@@ -32,4 +32,6 @@ jobs:
       - name: Waypoint Init
         run: waypoint init
       - name: Waypoint Build 
-        run: waypoint build -workspace ${GITHUB_REF##*/}
+        run: waypoint build -workspace ${{ github.head_ref }}
+      - name: Waypoint Deploy and Release
+        run: waypoint deploy -workspace ${{ github.head_ref }}
